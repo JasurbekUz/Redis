@@ -1,0 +1,94 @@
+redis server
+
+installing:
+	sudo apt instal redis-server
+	redis-server --version
+
+redis - NOSQL (not only SQL)
+
+redis - inmemory database
+
+redis - key : value vased
+
+redis - case-sensitive
+
+redis - ma'lumotni saqlash uchun ma'lumotni bazaga yozadi! lekin ishlatish bazadagi ma'lumotni operativkaga ko'chirib oladi
+
+foydalanish:
+	$ redis-cli
+
+		comands: set, get
+
+	set [key] [value]  =  write data
+	get [key]          =  get data
+
+	> set name "Jasur" // name - key, Jasur - value
+	OK
+	> get name
+	"Jasur"
+	
+	> clear 
+
+		comand: keys ... 
+
+	> keys *    // get all entities
+
+		like
+
+	> keys *Name   // get all entities where like wordName
+
+	> flushdb      // truncate db
+
+	> flushAll     // delete all db on objects
+
+	> set a 1
+	> expire a 5   // give limit 
+	> ttl a
+
+	> set a ok exp
+
+	...
+
+	>exit
+
+configures:
+
+	sudo subl /etc/redis/redis.conf
+	  1:
+		# Examples:
+		#
+		# bind 192.168.1.100 10.0.0.1
+
+		bind 127.0.0.1 ::1 -address
+
+		.
+		.
+		.
+		port 6379
+
+	  2:
+	  	supervised systemd   #istalgan payt boshqara 
+	  						 #olishimiz uchun
+
+	  						  ex:
+
+	  						  		sudo systemctl restart redis.service
+
+	  						  		sudo systemctl stop redis.service
+
+	  						  		sudo systemctl status redis.service 
+
+	  3:
+	  	requirepass password      # set your password
+
+
+	name$ redis-cli
+	
+	6379> set name "apple"
+	(error) NOAUTH Authentication required.
+	
+	> Auth password
+	
+	> set name "apple"
+	OK
+	...
